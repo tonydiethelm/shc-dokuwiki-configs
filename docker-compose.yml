@@ -1,0 +1,18 @@
+#shamelessly stolen from 
+#https://github.com/dokuwiki/docker/blob/main/docker-compose.yml
+
+#I need to run dokuwiki, but I'm using Caddy, not Apache, 
+# and the configuration is killing me. Fuck it, running it in 
+# docker, and doing a reverse proxy to it. 
+
+#Reminder, outside:inside
+
+services:
+  dokuwiki:
+    image: dokuwiki/dokuwiki:stable # other tags: master, <date> or <codename>
+    user: "1000:1000" # adjust to your required user id
+    restart: unless-stopped
+    ports:
+      - "3000:8080" # internal port is 8080, map to what you need
+    volumes:
+      - ./storage:/storage
